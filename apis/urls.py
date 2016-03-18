@@ -4,7 +4,10 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^(?P<pk>[0-9]+)$', views.index, name='index')
+    url(r'^upload$', views.upload, name='upload'),
+    url(r'^models$', views.getAll, name='getAll'),
+    url(r'^models/(?P<pk>(.)+)$', views.getOne, name='getOne'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
+
