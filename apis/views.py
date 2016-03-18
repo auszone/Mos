@@ -10,6 +10,18 @@ def index(request):
 @api_view(['POST'])
 def upload(request):
     file = request.FILES['file']
-    send(file)
+    send("data", file)
     return Response(status=201)
 
+@api_view(['GET'])
+def getAll(request):
+    objects = map(lambda r:r['name'], listObjects("data"))
+    result = []
+    for o in objects:
+        result.append(getMetaData("data", o))
+    return Response(result,content_type="application/json")
+
+@api_view(['GET'])
+def getOne(request, pk):
+    data = getMetaData("data", pk)
+    return Response(data,content_type="application/json")
