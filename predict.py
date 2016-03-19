@@ -6,6 +6,7 @@ import zipfile
 import json
 
 def predict(modelname, jsonfile):
+	print modelname, jsonfile
 	filename, file_extension = os.path.splitext(modelname)
 	fileList = filename.split('_')
 
@@ -19,9 +20,7 @@ def predict(modelname, jsonfile):
 
 	# predict
 	# reqUserList = {"userList": ["A3SGXH7AUHU8GW"]}
-	with open(jsonfile) as data_file:
-		userDict = json.load(data_file)
-	userList = userDict['userList']
+	userList = jsonfile['userList']
 
 	resultList = {}
 	if os.path.exists(modelname):
@@ -31,7 +30,7 @@ def predict(modelname, jsonfile):
 			outRowList = recommendedItemList[recommendedItemList['user_id']==user]
 			resultList[user] = list(outRowList['item_id'])
 		print resultList
-		return json.dumps(resultList)
+		return resultList
 
 	else:
 		raise Exception('model does not exist.')
