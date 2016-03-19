@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^upload$', views.upload, name='upload'),
     url(r'^models$', views.getAll, name='getAll'),
     url(r'^models/(?P<pk>(.)+)$', views.getOne, name='getOne'),
+    url(r'^models/(?P<model>(.)+)/predict$', views.predict, name='predict'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
